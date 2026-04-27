@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>GitHub Historic Uptime — an honest reading</title>
+  <link rel="stylesheet" href="src/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230969da'/%3E%3C/svg%3E" />
+  <script src="src/theme.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <div class="title-row">
+        <h1>GitHub Historic Uptime</h1>
+        <div class="theme-seg" role="radiogroup" aria-label="Color theme">
+          <button type="button" role="radio" data-theme-choice="auto"  aria-checked="true"  aria-label="Use system color theme (auto)">Auto</button>
+          <button type="button" role="radio" data-theme-choice="light" aria-checked="false" aria-label="Use light color theme">Light</button>
+          <button type="button" role="radio" data-theme-choice="dark"  aria-checked="false" aria-label="Use dark color theme">Dark</button>
+        </div>
+      </div>
+      <p class="subtitle">
+        Monthly downtime per component, sourced from the
+        <a href="https://www.githubstatus.com/" rel="noopener">official GitHub status page</a>.
+      </p>
+      <p class="data-meta-row">
+        <span id="data-meta-badge" class="badge">snapshot</span>
+        <span id="data-meta-text" class="data-meta"></span>
+      </p>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button id="tabbtn-average"   class="tab" role="tab" aria-selected="true"  aria-controls="tab-average"   tabindex="0"  data-tab="average">Average</button>
+      <button id="tabbtn-breakdown" class="tab" role="tab" aria-selected="false" aria-controls="tab-breakdown" tabindex="-1" data-tab="breakdown">Breakdown</button>
+    </nav>
+
+    <main>
+      <section id="tab-average" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-average">
+        <div class="controls" role="group" aria-label="Chart options">
+          <fieldset>
+            <legend>Metric</legend>
+            <label><input type="radio" name="metric" value="minutes" checked> Downtime (minutes/month)</label>
+            <label><input type="radio" name="metric" value="uptime">  Uptime % <span class="hint">(zoomed)</span></label>
+          </fieldset>
+          <fieldset>
+            <legend>Components included</legend>
+            <label><input type="radio" name="scope" value="core" checked> Stable core <span class="hint">(present 2016–today)</span></label>
+            <label><input type="radio" name="scope" value="all">                All components <span class="hint">(scope changes over time)</span></label>
+          </fieldset>
+          <fieldset>
+            <legend>Overlay</legend>
+            <label><input type="checkbox" id="opt-rolling" checked> 12-month rolling mean &amp; ±1σ band</label>
+            <label><input type="checkbox" id="opt-outliers"> Show outlier months at full scale <span class="hint">(off: cap to 95th percentile)</span></label>
+          </fieldset>
+        </div>
+
+        <p class="scope-caveat">
+          Note: more components were added to the status page over time (Actions 2019, Codespaces 2021, Copilot 2022).
+          Higher month-to-month variation in later years partly reflects this scope growth — see the small chart below.
+        </p>
+
+        <div class="legend-bar" id="legend-bar" role="group" aria-label="Series and annotation legend">
+          <div class="legend-group" id="legend-series" aria-label="Series">
+            <span class="legend-item"><span class="swatch dot"></span>Monthly value</span>
+            <span class="legend-item rolling-only"><span class="swatch line"></span>12-mo rolling mean</span>
+            <span class="legend-item rolling-only"><span class="swatch band"></span>±1σ band</span>
+            <span class="legend-item partial-only"><span class="swatch dot hollow"></span>Partial (in-progress) month</span>
+          </div>
+          <div class="legend-group" id="legend-annotations" aria-label="Annotations (click to toggle)">
+            <span class="legend-label">Events:</span>
+            <button class="chip" data-kind="incident"   aria-pressed="false"><span class="swatch tick incident"></span><span class="chip-label">Incidents</span> <span class="chip-count" data-count-for="incident"></span></button>
+            <button class="chip" data-kind="launch"     aria-pressed="false"><span class="swatch tick launch"></span><span class="chip-label">Component launches</span> <span class="chip-count" data-count-for="launch"></span></button>
+            <button class="chip" data-kind="corporate"  aria-pressed="false"><span class="swatch tick corporate"></span><span class="chip-label">Corporate &amp; context</span> <span class="chip-count" data-count-for="corporate"></span></button>
+          </div>
+        </div>
+
+        <figure class="chart-figure">
+          <figcaption id="average-caption">Average monthly downtime across the stable-core component set.</figcaption>
+          <p class="how-line"><a class="how-link" href="#methodology">First time here? See the methodology &amp; caveats ↓</a></p>
+          <div id="uptime-inset-host" class="uptime-inset-host" hidden aria-hidden="true"></div>
+          <div id="chart-average" class="chart" aria-describedby="average-caption" tabindex="0"></div>
+        </figure>
+
+        <figure class="chart-figure">
+          <figcaption>Number of components tracked on the status page each month. The dataset's <em>scope</em> grew over time — more components means more chances for any one to dip below 100% in a given month.</figcaption>
+          <div id="chart-scope" class="chart chart-small"></div>
+        </figure>
+
+        <details class="data-table-wrap">
+          <summary>View underlying data as a table (accessibility)</summary>
+          <div id="data-table"></div>
+        </details>
+      </section>
+
+      <section id="tab-breakdown" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-breakdown" hidden>
+        <p class="panel-intro">
+          One chart per status-page component. Y-axis is shared across all small multiples
+          so components can be compared fairly. The dashed line on each chart marks when
+          that component was first tracked.
+        </p>
+        <div id="chart-breakdown" class="chart breakdown-grid"></div>
+      </section>
+
+      <section id="methodology" class="methodology">
+        <h2>Methodology &amp; caveats</h2>
+        <dl class="methodology-list">
+          <dt>Source</dt>
+          <dd>Incidents from <code>githubstatus.com</code>'s public API and history pages. Fetch script: <code>scripts/fetch-data.js</code>.</dd>
+
+          <dt>Metric</dt>
+          <dd>For each (component, month) we sum the duration of incidents that affected that component, in minutes. "Uptime %" is derived as <code>1 − minutes / (30·24·60)</code> for display only; the underlying metric is downtime minutes.</dd>
+
+          <dt>Y-axis</dt>
+          <dd>The default chart starts at <strong>0 minutes</strong>. The "Uptime %" toggle is intentionally zoomed and labeled as such — useful for SLA comparison but it visually exaggerates differences of fractions of a percent.</dd>
+
+          <dt>Scope drift</dt>
+          <dd>The status page tracked ~7 components in 2016 and ~11 today (Actions added 2019, Packages 2019, Codespaces 2021, Copilot 2022). A like-for-like longitudinal comparison requires holding the component set fixed — that is the <em>Stable core</em> default.</dd>
+
+          <dt>Neutral annotations</dt>
+          <dd>Material events — component launches, major postmortems, methodology changes, and corporate events including the Microsoft acquisition — are included so readers can look for correlation themselves. They are shown as dated tick marks in a single context strip, not as vertical lines splitting the chart.</dd>
+
+          <dt>Partial months</dt>
+          <dd>The current month is shown as a hollow point and is excluded from the rolling mean and ±1σ band, because partial-month totals would otherwise look like dramatic dips or spikes.</dd>
+
+          <dt>What this chart cannot tell you</dt>
+          <dd>Severity-weighted user impact, regional variation, performance degradations that did not trip an incident, or how status-page reporting practices have themselves changed over time.</dd>
+
+          <dt>Data freshness</dt>
+          <dd>The live API only exposes the last ~50 incidents. Older months come from a committed snapshot derived from publicly-documented incidents; rerun the fetcher to refresh recent months.</dd>
+        </dl>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <p>Open source. Single-page static site, no tracking. Re-run <code>node scripts/fetch-data.js</code> to refresh.</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
