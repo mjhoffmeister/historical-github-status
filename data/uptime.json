@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-24T18:41:04.210Z",
+  "generated_at": "2026-04-28T06:56:38.651Z",
   "source": "live+snapshot",
   "notes": "Plausible monthly downtime synthesised from publicly-documented GitHub incidents and component launch dates. Use scripts/fetch-data.js for live data.",
   "minutes_per_month": 43200,
@@ -807,7 +807,7 @@
       4.8,
       4,
       12.1,
-      732.3,
+      556.9,
       5.3
     ],
     "pages": [
@@ -1176,7 +1176,7 @@
       3.8,
       3,
       2.5,
-      436.7,
+      261.3,
       3.4
     ],
     "packages": [
@@ -1545,7 +1545,7 @@
       20.7,
       2.2,
       3.3,
-      74.5,
+      48.7,
       2.1
     ]
   },
@@ -1644,25 +1644,25 @@
   ],
   "current_month": "2026-04",
   "partial": {
-    "prs": {
+    "issues": {
       "120": true
     },
-    "webhooks": {
+    "prs": {
       "120": true
     },
     "actions": {
       "120": true
     },
-    "copilot": {
-      "120": true
-    },
     "packages": {
       "120": true
     },
-    "codespaces": {
+    "webhooks": {
       "120": true
     },
-    "issues": {
+    "copilot": {
+      "120": true
+    },
+    "codespaces": {
       "120": true
     },
     "pages": {
