@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-30T06:54:26.497Z",
+  "generated_at": "2026-05-01T06:56:28.868Z",
   "source": "live+snapshot",
   "notes": "Plausible monthly downtime synthesised from publicly-documented GitHub incidents and component launch dates. Use scripts/fetch-data.js for live data.",
   "minutes_per_month": 43200,
@@ -562,7 +562,7 @@
       4.5,
       6.3,
       100.7,
-      5.6
+      567.6
     ],
     "prs": [
       0.5,
@@ -685,7 +685,7 @@
       8.9,
       4,
       439.2,
-      5.9
+      4205.7
     ],
     "webhooks": [
       2.7,
@@ -808,7 +808,7 @@
       4,
       12.1,
       166.9,
-      5.3
+      78
     ],
     "pages": [
       12.2,
@@ -931,7 +931,7 @@
       8.5,
       5.2,
       5.4,
-      4.4
+      39.6
     ],
     "notifications": [
       3.8,
@@ -1177,7 +1177,7 @@
       3,
       2.5,
       199.7,
-      3.4
+      681.8
     ],
     "packages": [
       null,
@@ -1300,7 +1300,7 @@
       6.6,
       4.1,
       62.8,
-      3
+      414
     ],
     "codespaces": [
       null,
@@ -1423,7 +1423,7 @@
       3.4,
       3.5,
       394.3,
-      16.7
+      239.6
     ],
     "copilot": [
       null,
@@ -1546,7 +1546,7 @@
       2.2,
       3.3,
       48.7,
-      2.1
+      279.8
     ]
   },
   "annotations": [
@@ -1642,40 +1642,6 @@
     "2026-03",
     "2026-04"
   ],
-  "current_month": "2026-04",
-  "partial": {
-    "actions": {
-      "120": true
-    },
-    "issues": {
-      "120": true
-    },
-    "prs": {
-      "120": true
-    },
-    "packages": {
-      "120": true
-    },
-    "webhooks": {
-      "120": true
-    },
-    "copilot": {
-      "120": true
-    },
-    "codespaces": {
-      "120": true
-    },
-    "pages": {
-      "120": true
-    },
-    "git": {
-      "120": true
-    },
-    "api": {
-      "120": true
-    },
-    "notifications": {
-      "120": true
-    }
-  }
+  "current_month": "2026-05",
+  "partial": {}
 }
