@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-24T18:41:00.645Z",
-  "source": "snapshot",
+  "generated_at": "2026-06-06T07:05:54.242Z",
+  "source": "live+snapshot",
   "notes": "Plausible monthly downtime synthesised from publicly-documented GitHub incidents and component launch dates. Use scripts/fetch-data.js for live data.",
   "minutes_per_month": 43200,
   "components": [
@@ -562,7 +562,7 @@
       4.5,
       6.3,
       4.1,
-      5.6
+      567.6
     ],
     "prs": [
       0.5,
@@ -685,7 +685,7 @@
       8.9,
       4,
       9.2,
-      5.9
+      4205.7
     ],
     "webhooks": [
       2.7,
@@ -808,7 +808,7 @@
       4,
       12.1,
       4.6,
-      5.3
+      78
     ],
     "pages": [
       12.2,
@@ -931,7 +931,7 @@
       8.5,
       5.2,
       5.4,
-      4.4
+      39.6
     ],
     "notifications": [
       3.8,
@@ -1177,7 +1177,7 @@
       3,
       2.5,
       3.5,
-      3.4
+      681.8
     ],
     "packages": [
       null,
@@ -1300,7 +1300,7 @@
       6.6,
       4.1,
       9.5,
-      3
+      414
     ],
     "codespaces": [
       null,
@@ -1423,7 +1423,7 @@
       3.4,
       3.5,
       21.2,
-      16.7
+      239.6
     ],
     "copilot": [
       null,
@@ -1546,7 +1546,7 @@
       2.2,
       3.3,
       3.4,
-      2.1
+      116.4
     ]
   },
   "annotations": [
@@ -1637,5 +1637,12 @@
       "kind": "incident",
       "title": "Aug 2025 — Database failover incident"
     }
-  ]
+  ],
+  "live_window_months": [
+    "2026-04",
+    "2026-05",
+    "2026-06"
+  ],
+  "current_month": "2026-06",
+  "partial": {}
 }
