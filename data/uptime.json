@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-02T11:48:07.086Z",
-  "source": "live+snapshot",
+  "generated_at": "2026-04-24T18:41:00.645Z",
+  "source": "snapshot",
   "notes": "Plausible monthly downtime synthesised from publicly-documented GitHub incidents and component launch dates. Use scripts/fetch-data.js for live data.",
   "minutes_per_month": 43200,
   "components": [
@@ -1637,13 +1637,5 @@
       "kind": "incident",
       "title": "Aug 2025 — Database failover incident"
     }
-  ],
-  "live_window_months": [
-    "2026-07",
-    "2026-08",
-    "2026-09",
-    "2026-10"
-  ],
-  "current_month": "2026-10",
-  "partial": {}
+  ]
 }
