@@ -153,5 +153,19 @@ function build() {
 
 const out = build();
 const outPath = path.join(__dirname, '..', 'data', 'uptime.snapshot.json');
+if (fs.existsSync(outPath)) {
+  const previous = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+  const previousMonths = new Map(previous.months.map((month, index) => [month, index]));
+  for (const [id, series] of Object.entries(out.downtime)) {
+    const previousSeries = previous.downtime[id];
+    if (!previousSeries) continue;
+    for (const [month, index] of previousMonths) {
+      const currentIndex = out.months.indexOf(month);
+      if (currentIndex >= 0 && index < previousSeries.length) {
+        series[currentIndex] = previousSeries[index];
+      }
+    }
+  }
+}
 fs.writeFileSync(outPath, JSON.stringify(out, null, 2));
 console.log(`Wrote ${outPath} — ${out.months.length} months × ${out.components.length} components.`);
