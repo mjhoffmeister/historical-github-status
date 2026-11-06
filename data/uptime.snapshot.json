@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T13:54:54.672Z",
+  "generated_at": "2026-11-06T13:40:21.841Z",
   "source": "snapshot",
   "notes": "Plausible monthly downtime synthesised from publicly-documented GitHub incidents and component launch dates. Use scripts/fetch-data.js for live data.",
   "minutes_per_month": 43200,
