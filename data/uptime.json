@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T13:50:53.707Z",
+  "generated_at": "2026-11-14T12:54:20.429Z",
   "source": "live+snapshot",
   "notes": "Plausible monthly downtime synthesised from publicly-documented GitHub incidents and component launch dates. Use scripts/fetch-data.js for live data.",
   "minutes_per_month": 43200,
@@ -1729,6 +1729,9 @@
   ],
   "current_month": "2026-11",
   "partial": {
+    "prs": {
+      "127": true
+    },
     "webhooks": {
       "127": true
     },
@@ -1739,9 +1742,6 @@
       "127": true
     },
     "copilot": {
-      "127": true
-    },
-    "prs": {
       "127": true
     },
     "api": {
